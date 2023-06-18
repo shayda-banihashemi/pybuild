@@ -11,6 +11,7 @@ FULL_PROJECT=$PROJECT_ROOT/$PROJECT
 if [ -d "$FULL_PROJECT" ]; then
   cd $PROJECT_ROOT
   rm -rf $PROJECT
+  gh repo delete $PROJECT --yes
 else
   echo Project $FULL_PROJECT does not already exist.
   exit 1

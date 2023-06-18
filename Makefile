@@ -31,7 +31,7 @@ createrepo:
 
 .PHONY : destroy
 destroy:
-	rm -rf $(FULL_PROJECT_PATH)
+	./destroy $(PROJECT_ROOT) $(PROJECT) $(VISIBILITY) 
 
 .PHONY : install
 install:

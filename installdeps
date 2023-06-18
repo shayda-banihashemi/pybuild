@@ -21,10 +21,9 @@ EOF
 loguru
 EOF
 
-  python -m pip install --upgrade pip
-  python -m pip install -r requirements.txt
-  python -m pip install -r requirements.dev.txt
-
+  python -m pip install --upgrade pip 1>/dev/null
+  python -m pip install -r requirements.txt 1>/dev/null
+  python -m pip install -r requirements.dev.txt 1>/dev/null
 else
   echo Project $FULL_PROJECT does not exist.
   exit 1
