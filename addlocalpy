@@ -1,0 +1,19 @@
+#!/bin/bash
+if [ "$#" -ne 3 ] ; then
+  echo "Usage: create <projectroot> <projectname>"
+  exit 1
+fi
+PROJECT_ROOT=$1
+PROJECT=$2
+FULL_PROJECT=$PROJECT_ROOT/$PROJECT
+PYTHON_VER=$3
+
+if [ -d "$FULL_PROJECT" ]; then
+  cd $FULL_PROJECT
+  pyenv virtualenv $PYTHON_VER $PROJECT
+  pyenv local $PROJECT
+else
+  echo Project $FULL_PROJECT does not exist.
+  exit 1
+fi
+
