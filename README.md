@@ -1,3 +1,3 @@
-# Auto builder ofr python projects
+# Auto builder for python projects
 
 Alpha version - more news soon
