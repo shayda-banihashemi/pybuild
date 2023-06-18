@@ -1,7 +1,7 @@
 
 #!/bin/bash
 if [ "$#" -ne 2 ] ; then
-  echo "Usage: create <projectroot> <projectname>"
+  echo "Usage: initialize <projectroot> <projectname>"
   exit 1
 fi
 PROJECT_ROOT=$1
@@ -11,6 +11,8 @@ FULL_PROJECT=$PROJECT_ROOT/$PROJECT
 if [ -d "$FULL_PROJECT" ]; then
   cd $PROJECT_ROOT
   putup --force --no-skeleton $PROJECT
+  cd $FULL_PROJECT
+  echo ".scan_*" >> .gitignore
 else
   echo Project $FULL_PROJECT does not exist.
   exit 1

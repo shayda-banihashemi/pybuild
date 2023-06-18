@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ "$#" -ne 2 ] ; then
-  echo "Usage: create <projectroot> <projectname>"
+  echo "Usage: installdeps <projectroot> <projectname>"
   exit 1
 fi
 PROJECT_ROOT=$1

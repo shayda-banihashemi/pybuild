@@ -7,7 +7,7 @@ FULL_PROJECT_PATH = $(PROJECT_ROOT)/$(PROJECT)
 PYTHON_VER="3.11.4"
 VISIBILITY=$(visibility)
 
-local: create initialize addlocalpy installdeps createrepo
+local: create initialize addlocalpy installdeps createrepo scan
 
 .PHONY : create
 create:
@@ -40,3 +40,8 @@ install:
 .PHONY : updatedeps
 updatedeps:
 	./updatedeps
+
+.PHONY : scan
+scan:
+	./scan $(PROJECT_ROOT) $(PROJECT)
+
