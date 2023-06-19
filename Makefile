@@ -15,7 +15,12 @@ docker: create build createrepo
 .DEFAULT_GOAL = check 
 .PHONY : check create initialize addlocalpy installdeps createrepo scan run clean destroy install test drun help
 
-help:
+check:
+ifeq ($(PROJECT), pybuild)
+	@echo "Must use a parameter when in pybuild dir"
+endif
+
+help: check
 	@echo "---------------------HELP-----------------------"
 	@echo "To test the project type make test"
 	@echo "To run the project type make run"
@@ -23,18 +28,10 @@ help:
 	@echo "make project=dirname visibility=puborpri local"
 	@echo "To setup a local project enter local"
 	@echo "------------------------------------------------"
-
-check: help
-ifeq ($(PROJECT), pybuild)
-	@echo "Must use a parameter when in pybuild dir"
-	@echo "Try make help"
 	@exit 99
-endif
 
 
 create:
-	@echo $(VISIBILITY)
-	@echo $(PROJECT)
 	./Makescripts/create $(PROJECT_ROOT) $(PROJECT)
 
 initialize:
