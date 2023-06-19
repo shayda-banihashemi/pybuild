@@ -1,0 +1,5 @@
+#!/bin/bash
+docker build -f ../Dockerfile -t pyproq .
+docker run --net mbpro -t -d -v /Users/andy/ws:/home/app/ws --restart always --name pyhack pyhack
+docker network create --subnet=172.20.0.0/16 mbpro &>/dev/null
+docker network connect mbpro pyhack &>/dev/null

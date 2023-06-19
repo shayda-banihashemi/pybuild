@@ -13,6 +13,7 @@ VISIBILITY=$(visibility)
 
 local: create initialize addlocalpy installdeps createrepo scan
 docker: create build createrepo
+
 .DEFAULT_GOAL = help
 .PHONY : create initialize addlocalpy installdeps createrepo scan run clean destroy install test
 
@@ -45,6 +46,8 @@ scan:
 	./Makescripts/scan
 
 clean:
+	find . -type f -name ‘.DS_Store’ -delete
+	find . -type f -name ‘*.pyc’ -delete
 	rm -rf __pycache__
 
 run:
