@@ -2,10 +2,11 @@
 # add gitgub action
 
 PROJECT_ROOT="/Users/andy/ws"
+PYTHON_VER="3.11.4"
+
 project?=$(notdir $(CURDIR))
 PROJECT=$(project)
 FULL_PROJECT_PATH = $(PROJECT_ROOT)/$(PROJECT)
-PYTHON_VER="3.11.4"
 visibility?="public"
 VISIBILITY=$(visibility)
 
@@ -18,6 +19,7 @@ docker: create build createrepo
 check:
 ifeq ($(PROJECT), pybuild)
 	@echo "Must use a parameter when in pybuild dir"
+	@echo
 endif
 
 help: check
