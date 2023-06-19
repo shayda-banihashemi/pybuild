@@ -1,8 +1,5 @@
 #!/usr/bin/make -f
-# add a run step for doppler
-# add containers
 # add gitgub action
-# database?
 
 # Makefile -  make project=dirname visibility=puborpri local
 PROJECT_ROOT="/Users/andy/ws"
@@ -15,7 +12,7 @@ local: create initialize addlocalpy installdeps createrepo scan
 docker: create build createrepo
 
 .DEFAULT_GOAL = help
-.PHONY : create initialize addlocalpy installdeps createrepo scan run clean destroy install test
+.PHONY : create initialize addlocalpy installdeps createrepo scan run clean destroy install test drun
 
 create:
 	./Makescripts/create $(PROJECT_ROOT) $(PROJECT)
@@ -56,10 +53,14 @@ run:
 test:
 	pytest -vv tests/
 
+drun:
+	doppler run -p $(PROJECT) -c dev -- python src/$(PROJECT)/app.py
+
 help:
-	@echo "---------------HELP-----------------"
-	@echo "To setup a local project enter local"
+	@echo "---------------------HELP-----------------------"
 	@echo "To test the project type make test"
 	@echo "To run the project type make run"
-	@echo "------------------------------------"
+	@echo "make project=dirname visibility=puborpri local"
+	@echo "To setup a local project enter local"
+	@echo "------------------------------------------------"
 
