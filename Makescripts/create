@@ -12,3 +12,6 @@ if [ -d "$FULL_PROJECT" ]; then
   exit 1
 fi
 mkdir -p $FULL_PROJECT
+cp $PROJECT_ROOT/pybuild/Makefile $FULL_PROJECT
+mkdir -p $FULL_PROJECT/Makescripts
+cp $PROJECT_ROOT/pybuild/Makescripts/* $FULL_PROJECT/Makescripts

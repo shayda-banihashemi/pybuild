@@ -1,4 +1,8 @@
 #!/usr/bin/make -f
+# add a run step for doppler
+# add containers
+# add gitgub action
+# database?
 
 # Makefile -  make project=dirname visibility=puborpri local
 PROJECT_ROOT="/Users/andy/ws"
@@ -8,40 +12,51 @@ PYTHON_VER="3.11.4"
 VISIBILITY=$(visibility)
 
 local: create initialize addlocalpy installdeps createrepo scan
+docker: create build createrepo
+.DEFAULT_GOAL = help
+.PHONY : create initialize addlocalpy installdeps createrepo scan run clean destroy install test
 
-.PHONY : create
 create:
-	./create $(PROJECT_ROOT) $(PROJECT)
+	./Makescripts/create $(PROJECT_ROOT) $(PROJECT)
 
-.PHONY : initialize
 initialize:
-	./initialize $(PROJECT_ROOT) $(PROJECT)
+	./Makescripts/initialize $(PROJECT_ROOT) $(PROJECT)
 
-.PHONY : addlocalpy
 addlocalpy:
-	./addlocalpy $(PROJECT_ROOT) $(PROJECT) $(PYTHON_VER)
+	./Makescripts/addlocalpy $(PROJECT_ROOT) $(PROJECT) $(PYTHON_VER)
 
-.PHONY : installdeps
 installdeps:
-	./installdeps $(PROJECT_ROOT) $(PROJECT)
+	./Makescripts/installdeps $(PROJECT_ROOT) $(PROJECT)
 
-.PHONY : createrepo 
 createrepo:
-	./createrepo $(PROJECT_ROOT) $(PROJECT) $(VISIBILITY)
+	./Makescripts/createrepo $(PROJECT_ROOT) $(PROJECT) $(VISIBILITY)
 
-.PHONY : destroy
 destroy:
-	./destroy $(PROJECT_ROOT) $(PROJECT) $(VISIBILITY) 
+	./Makescripts/destroy $(PROJECT_ROOT) $(PROJECT) $(VISIBILITY) 
 
-.PHONY : install
 install:
 	./install
 
-.PHONY : updatedeps
 updatedeps:
-	./updatedeps
+	python -m pip install --upgrade -r requirements.txt 1>/dev/null
+	python -m pip install --upgrade -r requirements.dev.txt 1>/dev/null
 
-.PHONY : scan
 scan:
-	./scan $(PROJECT_ROOT) $(PROJECT)
+	./Makescripts/scan
+
+clean:
+	rm -rf __pycache__
+
+run:
+	python src/$(PROJECT)/app.py
+
+test:
+	pytest -vv tests/
+
+help:
+	@echo "---------------HELP-----------------"
+	@echo "To setup a local project enter local"
+	@echo "To test the project type make test"
+	@echo "To run the project type make run"
+	@echo "------------------------------------"
 
