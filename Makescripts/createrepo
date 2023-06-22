@@ -17,7 +17,7 @@ if [ -d "$FULL_PROJECT" ]; then
   git add -A
   git commit -m "initial commit by make"
   gh repo create $PROJECT --$VISIBILITY --source=.
-  git push origin master
+  git push origin main
   git checkout -b develop
 else
   echo Project $FULL_PROJECT does not exist.

@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 # add gitgub action
 
-PROJECT_ROOT="/Users/andy/ws"
+PROJECT_ROOT="/Users/shaydabanihashemi/ws"
 PYTHON_VER="3.11.4"
 
 project?=$(notdir $(CURDIR))
@@ -14,7 +14,7 @@ local: check create initialize addlocalpy installdeps createrepo
 docker: create build createrepo
 
 .DEFAULT_GOAL = check 
-.PHONY : check create initialize addlocalpy installdeps createrepo scan run clean destroy install test drun help
+.PHONY : check create initialize addlocalpy installdeps createrepo scan run clean destroy install test drun help docker
 
 check:
 ifeq ($(PROJECT), pybuild)
@@ -75,3 +75,8 @@ test:
 drun:
 	doppler run -p $(PROJECT) -c dev -- python src/$(PROJECT)/app.py
 
+build:
+	docker build -t $(PROJECT) .
+
+crun: 
+	docker run --rm -i -t -v $PWD:/home/app/ws $(PROJECT) python /home/app/ws/app.py
