@@ -11,6 +11,7 @@ if [ -d "$FULL_PROJECT" ]; then
   cd $PROJECT_ROOT
   rm -rf $PROJECT
   gh repo delete $PROJECT --yes
+  pyenv uninstall -f $PROJECT
 else
   echo Project $FULL_PROJECT does not already exist.
   exit 2
